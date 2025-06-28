@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Story Generator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #e0c3fc, #8ec5fc);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            margin-top: 60px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4B0082;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        select, button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #6a0dad;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #4b0082;
+        }
+
+        .story-box {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-left: 5px solid #6a0dad;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+
+        .story-box strong {
+            color: #333;
+        }
+
+        .no-result {
+            text-align: center;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Story Generator</h1>
+
+        <form method="POST">
+            <label for="genre">Choose a Genre:</label>
+            <select name="genre" id="genre">
+                <option value="romcom">RomCom</option>
+                <option value="horror">Horror</option>
+                <option value="thriller">Thriller</option>
+                <option value="suspense">Suspense</option>
+            </select>
+            <button type="submit">Generate Story</button>
+        </form>
+
+        {% if stories %}
+            <h2>Generated {{ genre.capitalize() }} Stories</h2>
+            {% for story in stories %}
+                <div class="story-box">
+                    <p><strong>Prompt:</strong> {{ story.prompt }}</p>
+                    <p><strong>Idea:</strong> {{ story.idea }}</p>
+                </div>
+            {% endfor %}
+        {% elif genre %}
+            <p class="no-result">No stories found for this genre.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
